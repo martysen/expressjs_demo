@@ -73,13 +73,23 @@ const customers = require("./customers");
  * EXAMPLE -4: CREATE A YOUR OWN MIDDLEWARE FUNCTION
  * *******************************************************************************************
  */
-// import the middleware here:
-const logger = require("./middleware/logger");
+// // import the middleware here:
+// const logger = require("./middleware/logger");
 
-// initialize your middleware
-app.use(logger);
-app.get("/api/customers", (req, res) => {
-  res.json(customers);
+// // initialize your middleware
+// app.use(logger);
+// app.get("/api/customers", (req, res) => {
+//   res.json(customers);
+// });
+
+/*******************************************************************************************
+ * EXAMPLE -5: GET A SINGLE CUSTOMER FROM THE CUSTOMER LIST
+ * *******************************************************************************************
+ */
+app.get("/api/customers/:id", (req, res) => {
+  res.json(
+    customers.filter((customer) => customer.id === parseInt(req.params.id))
+  );
 });
 
 /*********************************************************************************************
