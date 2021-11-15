@@ -1,7 +1,7 @@
 {
   "name": "expressjs_tutorial",
   "version": "1.0.0",
-  "description": "tutorial and demo of express framework ",
+  "description": "express.js tutorial",
   "main": "index.js",
   "scripts": {
     "start": "node index",
@@ -12,11 +12,8 @@
     "url": "git+https://github.com/martysen/expressjs_demo.git"
   },
   "keywords": [
-    "js",
-    "node.js",
-    "express.js",
-    "web-development",
-    "server-side"
+    "nodejs",
+    "expressjs"
   ],
   "author": "AmartyaSOU",
   "license": "ISC",
@@ -24,9 +21,10 @@
     "url": "https://github.com/martysen/expressjs_demo/issues"
   },
   "homepage": "https://github.com/martysen/expressjs_demo#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.14",
-    "uuid": "^8.3.2"
+    "express": "^4.17.1"
   }
 }
