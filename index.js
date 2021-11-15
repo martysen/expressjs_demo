@@ -65,22 +65,22 @@ const customers = require("./customers");
  * ./Create the route handle to return the above array as JSON
  * We will call this route using POSTMAN with a GET request
  */
-app.get("/api/customers", (req, res) => {
-  res.json(customers);
-});
+// app.get("/api/customers", (req, res) => {
+//   res.json(customers);
+// });
 
 /*******************************************************************************************
  * EXAMPLE -4: CREATE A YOUR OWN MIDDLEWARE FUNCTION
  * *******************************************************************************************
  */
-// create middleware. @params: req, req, next (next is to point to the next function in the middleware stack)
-const logger = (req, res, next) => {
-  //log the protocol type and the date of request
-  // for date, install a 3rd party package called moment
-  console.log(`${req.protocol}://${req.get("host")}${req.originalURL}}`);
-};
+// import the middleware here:
+const logger = require("./middleware/logger");
+
 // initialize your middleware
 app.use(logger);
+app.get("/api/customers", (req, res) => {
+  res.json(customers);
+});
 
 /*********************************************************************************************
  * START YOUR SERVER
