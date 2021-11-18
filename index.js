@@ -18,6 +18,7 @@ const express = require("express");
 
 // other modules
 const path = require("path");
+const ejs = require("ejs");
 
 // Initialize express framework
 const app = express();
@@ -25,6 +26,14 @@ const app = express();
 // Initialize Body Parser Middleware to parse data sent by users in the request object
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // to parse HTML form data
+
+// Initialize Handlebar Middleware
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  // by default it looks for .ejs files in the views folder
+  res.render("index", { name: "Amartya" });
+});
 
 /*******************************************
  * Example 1 - CREATE ROUTE HANDLERS EXAMPLE
@@ -52,7 +61,7 @@ app.use(express.urlencoded({ extended: false })); // to parse HTML form data
  * * Note -- you generally are not going to use express for static servers.
  * It is best suited to create JSON APIs or render templates to create dynamic web apps
  */
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 /*****************************************************************************
  * EXAMPLE -3 : CREATING ROUTES FOR A SIMPLE RESTful API USING HARDCODED DATA
@@ -103,6 +112,12 @@ app.use("/api/customers", require("./routes/api/customerRoutes.js"));
 /**
  * Next 3 examples in the customerRoutes.js file
  * --create a customer, update a customer, and delete a customer
+ */
+
+/**
+ * HANDLEBARS tutorial (https://handlebarsjs.com/installation/)
+ * Template engine to render HTML
+ * Install handlebars using npm and import it at top
  */
 
 /*********************************************************************************************
