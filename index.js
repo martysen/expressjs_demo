@@ -22,6 +22,10 @@ const path = require("path");
 // Initialize express framework
 const app = express();
 
+// Initialize Body Parser Middleware to parse data sent by users in the request object
+app.use(express.json());
+app.use(express.urlencoded({ extended: false })); // to parse HTML form data
+
 /*******************************************
  * Example 1 - CREATE ROUTE HANDLERS EXAMPLE
  * *****************************************
@@ -63,7 +67,7 @@ const customers = require("./customers");
 
 /**
  * ./Create the route handle to return the above array as JSON
- * We will call this route using POSTMAN with a GET request
+ * We will call this route with a GET request
  */
 // app.get("/api/customers", (req, res) => {
 //   res.json(customers);
@@ -73,11 +77,33 @@ const customers = require("./customers");
  * EXAMPLE -4: GET A SINGLE CUSTOMER FROM THE CUSTOMER LIST
  * *******************************************************************************************
  */
-app.get("/api/customers/:id", (req, res) => {
-  res.json(
-    customers.filter((customer) => customer.id === parseInt(req.params.id))
-  );
-});
+// app.get("/api/customers/:id", (req, res) => {
+//   res.json(
+//     customers.filter((customer) => customer.id === parseInt(req.params.id))
+//   );
+// });
+
+/**
+ * Example -5: The Router Functionality
+ * Purpose: Group all similar types of routes in a separate file (like /api/customers and /api/customers/:id etc)
+ * Pre-requisite: In the root directory, create a sub-directory called routes.
+ * Inside routes directory, create a sub-directory called api (since we are grouping api routes that is serving JSON data in this example)
+ * Inside api directory create a file called customerRoutes.js
+ * Copy paste the previous two routes in example 4 and 3 and paste it in the above file and then comment out the code lines from this file
+ *
+ */
+/**
+ * Import your router using app.use()
+ * takes two params: the parent route string, require method with parameter of the file which contains all other routes
+ * Since you are specifying the parent route here, you don't need to specify it in the routes of the route file
+ *  */
+// Customer API routes
+app.use("/api/customers", require("./routes/api/customerRoutes.js"));
+
+/**
+ * Next 3 examples in the customerRoutes.js file
+ * --create a customer, update a customer, and delete a customer
+ */
 
 /*********************************************************************************************
  * START YOUR SERVER
