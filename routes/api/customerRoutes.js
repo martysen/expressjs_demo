@@ -92,6 +92,7 @@ router.post("/", (req, res) => {
 /**
  * Update a existing customer with a .put() request -- router.put()
  * Delete a existing customer with a .delete() request -- router.delete()
+ * Try for yourself.
  *
  */
 
