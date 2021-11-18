@@ -19,7 +19,6 @@ const router = express.Router();
  * So we need to import that here
  */
 const customers = require("../../customers");
-const uuid = require("uuid");
 
 /**
  * Now, when you create the routes, instead of coding app.get()
@@ -70,17 +69,17 @@ router.get("/:id", (req, res) => {
  */
 router.post("/", (req, res) => {
   const newCustomer = {
-    id: uuid.v4,
+    id: req.body.id,
     name: req.body.name, // we can do this since we are using the body parser
     email: req.body.email,
     status: "active",
   };
 
   // First validate name and email parameters are not empty
-  if (!newCustomer.name || !newCustomer.email) {
+  if (!newCustomer.id || !newCustomer.name || !newCustomer.email) {
     return res
       .status(400)
-      .json({ msg: "You cannot have email or name parameters empty" });
+      .json({ msg: "You cannot have id, email or name parameters empty" });
   }
 
   // insert into existing array
@@ -89,6 +88,12 @@ router.post("/", (req, res) => {
   // return the entire array with the new member
   res.json(customers);
 });
+
+/**
+ * Update a existing customer with a .put() request -- router.put()
+ * Delete a existing customer with a .delete() request -- router.delete()
+ *
+ */
 
 //Export the router object
 module.exports = router;
